@@ -107,13 +107,12 @@ function timeSpanToString(startDate, endDate) {
  */
 function angleBetweenClockHands(date) {
   const dateClock = new Date(date);
-  const angleH = 30 * dateClock.getHours() + dateClock.getMinutes() / 2;
-  const angleM = 6 * dateClock.getMinutes();
-
+  const angleH = 30 * dateClock.getUTCHours() + dateClock.getUTCMinutes() / 2;
+  const angleM = 6 * dateClock.getUTCMinutes();
   const angle = Math.abs(angleH - angleM) > 180 ? 360 - Math.abs(angleH - angleM) : Math.abs(angleH - angleM);
 
-  return angle / 57.2958;
-}
+  return Math.abs(angle / 57.2958);
+} 
 
 
 module.exports = {
