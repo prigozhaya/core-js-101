@@ -20,8 +20,11 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  return {
+    width,
+    height,
+  };
 }
 
 
@@ -35,8 +38,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -51,8 +54,10 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  const obj = JSON.parse(json);
+  obj.prototype = proto;
+  return obj;
 }
 
 
@@ -111,36 +116,86 @@ function fromJSON(/* proto, json */) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  el: '',
+  elId: '',
+  elClass: '',
+  elAttr: '',
+  elPseudoClass: '',
+  elPseudoElement: '',
+  elCombine: '',
+
+  element(value) {
+    this.el = value;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    this.elId = `#${value}`;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.elClass += `.${value}`;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    this.elAttr = `[${value}]`;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    this.elPseudoClass += `:${value}`;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  pseudoElement(value) {
+    this.elPseudoElement = `::${value}`;
+    const select = { ...this };
+    this.cleanObj();
+    return select;
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  combine(selector1, combinator, selector2) {
+    const select1 = selector1.combineSelect();
+    const select2 = selector2.combineSelect();
+    this.elCombine = `${select1}${combinator}${select2}`;
+    return { ...this };
   },
+
+  cleanObj() {
+    this.el = '';
+    this.elId = '';
+    this.elClass = '';
+    this.elAttr = '';
+    this.elPseudoClass = '';
+    this.elPseudoElement = '';
+  },
+
+  combineSelect() {
+    const selector = `${this.el}${this.elId}${this.elClass}${this.elAttr}${this.elPseudoClass}${this.elPseudoElement}`;
+    this.cleanObj();
+    this.elCombine = '';
+    return selector;
+  },
+
+  stringify() {
+    const selector = this.elCombine === '' ? `${this.el}${this.elId}${this.elClass}${this.elAttr}${this.elPseudoClass}${this.elPseudoElement}` : `${this.elCombine}`;
+    this.cleanObj();
+    this.elCombine = '';
+    return selector;
+  }
 };
-
-
 module.exports = {
   Rectangle,
   getJSON,

@@ -44,8 +44,8 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return (x) => exponent ** x;
 }
 
 
@@ -62,8 +62,26 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  let result = '';
+  if (args.length > 0) {
+    for (let i = 0; i < args.length; i++) {
+      let part = '';
+      const koff = Math.abs(args[i]) === 1 ? '' : Math.abs(args[i]);
+      if (args[i] < 0) {
+        part = i === args.length - 1 ? ` - ${koff}` : i === args.length - 2 ? ` - ${koff}*x` : ` - ${koff}*x^${args.length - i - 1}`;
+      }
+
+      if (args[i] > 0) {
+        part = i === args.length - 1 ? ` + ${koff}` : i === args.length - 2 ? ` + ${koff}*x` : ` + ${koff}*x^${args.length - i - 1}`;
+      }
+      result += part;
+    }
+  } else {
+    return null;
+  }
+  result = result[1] === '+' ? 'y =' + result.slice(2, result.length) : 'y = ' + result;
+  return result;
 }
 
 
@@ -81,8 +99,20 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(fn) {
+  let memory = [];
+  let k = 0;
+  return function() {
+    if (memory.length > 0) {
+      var result = fn();
+      memory.push(result);
+      return memory[k++];
+    } else {
+      var result = fn();
+      memory.push(result);
+      return result;
+    }
+  };
 }
 
 
@@ -169,8 +199,12 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let currId = startFrom - 1;
+  return () => {
+    currId++;
+    return currId;
+  }
 }
 
 
