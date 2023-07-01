@@ -23,8 +23,10 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return (x) => {
+    return f(g(x))
+  }
 }
 
 
@@ -131,8 +133,16 @@ function memoize(fn) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return () => {
+    try {
+      return func();
+    } catch (e) {
+      for (let i = attempts; i > 0; i--) {
+        return func();
+      }
+    }
+  }
 }
 
 
@@ -159,8 +169,13 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger( func, logFunc) {
+  return (...args)=>{
+    logFunc(`${func.name}(${args}) starts`);
+    const result = func(args);
+    logFunc(`${func.name}(${args}) ends`);
+    return result;
+  }
 }
 
 
@@ -177,8 +192,10 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return (...args2) => {
+    return fn(...args1, ...args2);
+  }
 }
 
 

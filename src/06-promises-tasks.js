@@ -29,11 +29,18 @@
  *                                                    //  Ask her again.';
  */
 function willYouMarryMe(isPositiveAnswer) {
-  return new Promise((isPositiveAnswer)=>{return 'lol'})
+  return new Promise((resolve, reject) => {
+    if (isPositiveAnswer !== undefined) {
+      if (isPositiveAnswer) {
+        resolve('Hooray!!! She said "Yes"!');
+      } else {
+        resolve('Oh no, she said "No".');
+      }
+    } else {
+      reject(Error('Wrong parameter is passed! Ask her again.'));
+    }
+  })
 }
-const p1 = willYouMarryMe(true);
-p1.then(answer => console.log(answer));
-
 
 /**
  * Return Promise object that should be resolved with array containing plain values.
@@ -50,8 +57,14 @@ p1.then(answer => console.log(answer));
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  let arr = [];
+  for (let i = 0; i < array.length; i++) {
+    array[i].then((x) => { arr.push(x) }).catch((error) => { arr.push(error) });
+  }
+  return new Promise((resolve) => {
+    resolve(arr);
+  })
 }
 
 /**
@@ -73,8 +86,14 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return new Promise((resolve, reject) => {
+    array.forEach((item) => {
+      item.then((x) => {
+        resolve(x);
+      }).catch((x) => { reject(Error(`${x}`)) })
+    })
+  })
 }
 
 /**
@@ -94,8 +113,15 @@ function getFastestPromise(/* array */) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
+function chainPromises(array, action) {
+  let promisesArr = Promise.allSettled(array).then((results) => {
+    console.log(results[0].value);
+    let start = typeof results[0].value === 'string' ? '' : 0;
+    console.log(start);
+    return results.reduce((acc, next) => action(acc, next.value), start);
+  });
+  console.log(promisesArr);
+  return promisesArr;
 }
 
 module.exports = {
