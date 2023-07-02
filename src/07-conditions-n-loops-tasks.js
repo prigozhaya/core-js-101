@@ -51,7 +51,7 @@ function getFizzBuzz(num) {
  */
 function getFactorial(n) {
   let result = 1;
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= n; i += 1) {
     result *= i;
   }
   return result;
@@ -72,7 +72,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
   let result = n1;
-  for (let i = n1 + 1; i <= n2; i++) {
+  for (let i = n1 + 1; i <= n2; i += 1) {
     result += i;
   }
   return result;
@@ -132,28 +132,43 @@ function isTriangle(...args) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  if (rect2.left >= rect1.left && rect2.left <= rect1.left + rect1.width && rect2.top >= rect1.top && rect2.top <= rect1.top + rect1.height) {
+  if (rect2.left >= rect1.left && rect2.left <= rect1.left + rect1.width
+    && rect2.left >= rect1.left && rect2.left <= rect1.left + rect1.width
+    && rect2.top >= rect1.top && rect2.top <= rect1.top + rect1.height) {
     return true;
   }
-  if (rect2.left + rect2.width >= rect1.left && rect2.left + rect2.width <= rect1.left + rect1.width && rect2.top >= rect1.top && rect2.top <= rect1.top + rect1.height) {
+  if (rect2.left + rect2.width >= rect1.left && rect2.left + rect2.width <= rect1.left + rect1.width
+    && rect2.top >= rect1.top && rect2.top <= rect1.top + rect1.height) {
     return true;
   }
-  if (rect2.left >= rect1.left && rect2.left <= rect1.left + rect1.width && rect2.top + rect2.height >= rect1.top && rect2.top + rect2.height <= rect1.top + rect1.height) {
+  if (rect2.left >= rect1.left && rect2.left <= rect1.left + rect1.width
+    && rect2.top + rect2.height >= rect1.top
+    && rect2.top + rect2.height <= rect1.top + rect1.height) {
     return true;
   }
-  if (rect2.left + rect2.width >= rect1.left && rect2.left + rect2.width <= rect1.left + rect1.width && rect2.top + rect2.height >= rect1.top && rect2.top + rect2.height <= rect1.top + rect1.height) {
+  if (rect2.left + rect2.width >= rect1.left
+    && rect2.left + rect2.width <= rect1.left + rect1.width
+    && rect2.top + rect2.height >= rect1.top
+    && rect2.top + rect2.height <= rect1.top + rect1.height) {
     return true;
   }
-  if (rect1.left >= rect2.left && rect1.left <= rect2.left + rect2.width && rect1.top >= rect2.top && rect1.top <= rect2.top + rect2.height) {
+  if (rect1.left >= rect2.left && rect1.left <= rect2.left + rect2.width && rect1.top >= rect2.top
+    && rect1.top <= rect2.top + rect2.height) {
     return true;
   }
-  if (rect1.left + rect1.width >= rect2.left && rect1.left + rect1.width <= rect2.left + rect2.width && rect1.top >= rect2.top && rect1.top <= rect2.top + rect2.height) {
+  if (rect1.left + rect1.width >= rect2.left && rect1.left + rect1.width <= rect2.left + rect2.width
+    && rect1.top >= rect2.top && rect1.top <= rect2.top + rect2.height) {
     return true;
   }
-  if (rect1.left >= rect2.left && rect1.left <= rect2.left + rect2.width && rect1.top + rect1.height >= rect2.top && rect1.top + rect1.height <= rect2.top + rect2.height) {
+  if (rect1.left >= rect2.left && rect1.left <= rect2.left + rect2.width
+    && rect1.top + rect1.height >= rect2.top
+    && rect1.top + rect1.height <= rect2.top + rect2.height) {
     return true;
   }
-  if (rect1.left + rect1.width >= rect2.left && rect1.left + rect1.width <= rect2.left + rect2.width && rect1.top + rect1.height >= rect2.top && rect1.top + rect1.height <= rect2.top + rect2.height) {
+  if (rect1.left + rect1.width >= rect2.left
+    && rect1.left + rect1.width <= rect2.left + rect2.width
+    && rect1.top + rect1.height >= rect2.top
+    && rect1.top + rect1.height <= rect2.top + rect2.height) {
     return true;
   }
   return false;
@@ -204,7 +219,7 @@ function isInsideCircle(circle, point) {
  */
 function findFirstSingleChar(str) {
   const strArr = str.split('');
-  for (let i = 0; i < strArr.length; i++) {
+  for (let i = 0; i < strArr.length; i += 1) {
     const allChar = strArr.filter((x) => x === strArr[i]);
     if (allChar.length === 1) {
       return strArr[i];
@@ -301,7 +316,7 @@ function isCreditCardNumber(ccn) {
   const ccnArr = ccn.toString().split('');
   let result = 0;
   if (ccnArr.length % 2 === 0) {
-    for (let i = 0; i < ccnArr.length; i++) {
+    for (let i = 0; i < ccnArr.length; i += 1) {
       if (i % 2 !== 0) { // чет
         result += +ccnArr[i];
       } else {
@@ -309,7 +324,7 @@ function isCreditCardNumber(ccn) {
       }
     }
   } else {
-    for (let i = 0; i < ccnArr.length; i++) {
+    for (let i = 0; i < ccnArr.length; i += 1) {
       if (i % 2 === 0) { // нечет
         result += +ccnArr[i];
       } else {
@@ -367,7 +382,7 @@ function isBracketsBalanced(str) {
   const openBrackets = ['(', '[', '{', '<'];
   const closeBrackets = [')', ']', '}', '>'];
   const stack = [];
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i += 1) {
     if (openBrackets.includes(str[i])) {
       stack.push(str[i]);
     } else if (closeBrackets.indexOf(str[i]) === openBrackets.indexOf(stack[stack.length - 1])) {
@@ -419,12 +434,12 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
   let pathesArrs = pathes.map((el) => el.split('/'));
-  for (let i = 0; i < pathesArrs.length; i++) {
+  for (let i = 0; i < pathesArrs.length; i += 1) {
     pathesArrs[i][0] = pathesArrs[i][0] === '' ? '/' : pathesArrs[i][0];
   }
   pathesArrs = pathesArrs.sort((a, b) => a.length - b.length);
   let result = '';
-  for (let i = 0; i < pathesArrs[0].length; i++) {
+  for (let i = 0; i < pathesArrs[0].length; i += 1) {
     const checkCount = pathesArrs.reduce((count, current) => {
       const pathStr = pathesArrs[0][i];
       return current[i] === pathStr ? count + 1 : count;
@@ -463,11 +478,11 @@ function getMatrixProduct(m1, m2) {
   const m2Cols = m2[0].length;
 
   const multiplyM = new Array(m1Rows);
-  for (let r = 0; r < m1Rows; r++) {
+  for (let r = 0; r < m1Rows; r += 1) {
     multiplyM[r] = new Array(m2Cols);
-    for (let c = 0; c < m2Cols; c++) {
+    for (let c = 0; c < m2Cols; c += 1) {
       multiplyM[r][c] = 0;
-      for (let i = 0; i < m1Cols; i++) {
+      for (let i = 0; i < m1Cols; i += 1) {
         multiplyM[r][c] += m1[r][i] * m2[i][c];
       }
     }
@@ -510,9 +525,9 @@ function getMatrixProduct(m1, m2) {
 function evaluateTicTacToePosition(position) {
   const mainDiag = [];
   const subDiag = [];
-  for (let i = 0; i < position.length; i++) {
+  for (let i = 0; i < position.length; i += 1) {
     const col = [];
-    for (let j = 0; j < position.length; j++) {
+    for (let j = 0; j < position.length; j += 1) {
       col.push(position[j][i]);
       if (i === j) {
         mainDiag.push(position[j][i]);
@@ -531,8 +546,9 @@ function evaluateTicTacToePosition(position) {
   if (subDiag.every((el) => el === subDiag[0]) && subDiag.length === position.length) {
     return subDiag[0];
   }
-  for (let i = 0; i < position.length; i++) {
-    if (position[i].every((el) => el === position[i][0]) && position[i].length === position.length && position[i][0] !== undefined) {
+  for (let i = 0; i < position.length; i += 1) {
+    if (position[i].every((el) => el === position[i][0])
+    && position[i].length === position.length && position[i][0] !== undefined) {
       return position[i][0];
     }
   }

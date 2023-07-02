@@ -67,9 +67,10 @@ function getPolynom(...args) {
   return (x) => {
     let result = 0;
     if (arg.length > 0) {
-      for (let i = 0; i < arg.length; i++) {
+      for (let i = 0; i < arg.length; i += 1) {
         let part = 0;
-        part = i === arg.length - 1 ? arg[i] : i === arg.length - 2 ? arg[i] * x : arg[i] * x ** (arg.length - i - 1);
+        const hernaya1 = i === arg.length - 2 ? arg[i] * x : arg[i] * x ** (arg.length - i - 1);
+        part = i === arg.length - 1 ? arg[i] : hernaya1;
         result += part;
       }
     } else {
@@ -120,7 +121,7 @@ function retry(func, attempts) {
     try {
       return func();
     } catch (e) {
-      for (let i = attempts; i > 0; i--) {
+      for (let i = attempts; i > 0; i -= 1) {
         return retry(func, attempts)();
       }
     }
@@ -201,7 +202,7 @@ function partialUsingArguments(fn, ...args1) {
 function getIdGeneratorFunction(startFrom) {
   let currId = startFrom - 1;
   return () => {
-    currId++;
+    currId += 1;
     return currId;
   };
 }

@@ -652,9 +652,12 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-  const head = arr.length % 2 === 0 ? arr.slice(0, arr.length / 2) : arr.slice(0, Math.floor(arr.length / 2));
-  const tail = arr.length % 2 === 0 ? arr.slice(arr.length / 2, arr.length) : arr.slice(Math.ceil(arr.length / 2), arr.length);
-  return arr.length % 2 === 0 ? tail.concat(head) : tail.concat(arr[Math.floor(arr.length / 2)]).concat(head);
+  const hernaya1 = arr.slice(0, Math.floor(arr.length / 2));
+  const hernaaya2 = arr.slice(Math.ceil(arr.length / 2), arr.length);
+  const head = arr.length % 2 === 0 ? arr.slice(0, arr.length / 2) : hernaya1;
+  const tail = arr.length % 2 === 0 ? arr.slice(arr.length / 2, arr.length) : hernaaya2;
+  const hernaya3 = tail.concat(arr[Math.floor(arr.length / 2)]).concat(head);
+  return arr.length % 2 === 0 ? tail.concat(head) : hernaya3;
 }
 
 

@@ -208,12 +208,15 @@ function getRectangleString(width, height) {
   for (let h = 1; h <= height; h += 1) {
     for (let w = 1; w <= width; w += 1) {
       if (h === 1) {
-        rectangle = w === 1 ? `${rectangle}┌` : w < width ? `${rectangle}─` : `${rectangle}┐\n`;
+        const hernaya1 = w < width ? `${rectangle}─` : `${rectangle}┐\n`;
+        rectangle = w === 1 ? `${rectangle}┌` : hernaya1;
       }
       if (h === height) {
-        rectangle = w === 1 ? `${rectangle}└` : w < width ? `${rectangle}─` : `${rectangle}┘\n`;
+        const hernaya2 = w < width ? `${rectangle}─` : `${rectangle}┘\n`;
+        rectangle = w === 1 ? `${rectangle}└` : hernaya2;
       } else if (h > 1 && h < height) {
-        rectangle = w === 1 ? `${rectangle}│` : w < width ? `${rectangle} ` : `${rectangle}│\n`;
+        const hernaya3 = w < width ? `${rectangle} ` : `${rectangle}│\n`;
+        rectangle = w === 1 ? `${rectangle}│` : hernaya3;
       }
     }
   }
@@ -239,7 +242,7 @@ function getRectangleString(width, height) {
  */
 function encodeToRot13(str) {
   const arr = str.split('');
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (arr[i].match('^[a-zA-Z]+$')) {
       let code = arr[i];
       if (code.match('^[n-zN-Z]+$')) {

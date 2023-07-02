@@ -59,7 +59,7 @@ function willYouMarryMe(isPositiveAnswer) {
  */
 function processAllPromises(array) {
   const arr = [];
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i += 1) {
     array[i].then((x) => { arr.push(x); }).catch((error) => { arr.push(error); });
   }
   return new Promise((resolve) => {
@@ -116,7 +116,7 @@ function getFastestPromise(array) {
 function chainPromises(array, action) {
   return new Promise((resolve, reject) => {
     const results = [];
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i += 1) {
       array[i].then((x) => {
         results.push(x);
         const start = typeof results[0] === 'string' ? '' : 0;

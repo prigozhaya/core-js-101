@@ -84,7 +84,8 @@ function timeSpanToString(startDate, endDate) {
   const min = dateDiff / msInMin > 9 ? `${Math.trunc(dateDiff / msInMin)}` : `0${Math.trunc(dateDiff / msInMin)}`;
   dateDiff -= min * msInMin;
   const sec = dateDiff / msInSec > 9 ? `${Math.trunc(dateDiff / msInSec)}` : `0${Math.trunc(dateDiff / msInSec)}`;
-  const msec = dateDiff - sec * msInSec < 10 ? `00${Math.trunc(dateDiff - sec * msInSec)}` : dateDiff - sec * msInSec < 100 ? `0${Math.trunc(dateDiff - sec * msInSec)}` : `${Math.trunc(dateDiff - sec * msInSec)}`;
+  const hernaya1 = dateDiff - sec * msInSec < 100 ? `0${Math.trunc(dateDiff - sec * msInSec)}` : `${Math.trunc(dateDiff - sec * msInSec)}`;
+  const msec = dateDiff - sec * msInSec < 10 ? `00${Math.trunc(dateDiff - sec * msInSec)}` : hernaya1;
   return `${hour}:${min}:${sec}.${msec}`;
 }
 
@@ -109,7 +110,8 @@ function angleBetweenClockHands(date) {
   const dateClock = new Date(date);
   const angleH = 30 * dateClock.getUTCHours() + dateClock.getUTCMinutes() / 2;
   const angleM = 6 * dateClock.getUTCMinutes();
-  const angleHM = Math.abs(angleH - angleM) > 360 ? Math.abs(angleH - angleM) - Math.trunc(Math.abs(angleH - angleM) / 360) * 360 : Math.abs(angleH - angleM);
+  const hernaya1 = Math.abs(angleH - angleM) - Math.trunc(Math.abs(angleH - angleM) / 360) * 360;
+  const angleHM = Math.abs(angleH - angleM) > 360 ? hernaya1 : Math.abs(angleH - angleM);
   const angle = angleHM > 180 ? 360 - angleHM : angleHM;
   return Math.abs(angle / 57.29577951308232087);
 }
