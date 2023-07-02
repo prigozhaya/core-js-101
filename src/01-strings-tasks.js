@@ -205,8 +205,8 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   let rectangle = '';
-  for (let h = 1; h <= height; h++) {
-    for (let w = 1; w <= width; w++) {
+  for (let h = 1; h <= height; h += 1) {
+    for (let w = 1; w <= width; w += 1) {
       if (h === 1) {
         rectangle = w === 1 ? `${rectangle}┌` : w < width ? `${rectangle}─` : `${rectangle}┐\n`;
       }
