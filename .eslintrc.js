@@ -17,6 +17,12 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-
+    'indent': 'off',
+    'no-plusplus': ["error", { "allowForLoopAfterthoughts": true }],
+    "no-nested-ternary": "off",
+    'prefer-template': "off",
+    'max-len': ["error", { "code": 400 }],
+    'no-plusplus': "off",
+    'prefer-rest-params': 'off'
   },
 };
