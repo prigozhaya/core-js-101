@@ -109,8 +109,9 @@ function angleBetweenClockHands(date) {
   const dateClock = new Date(date);
   const angleH = 30 * dateClock.getUTCHours() + dateClock.getUTCMinutes() / 2;
   const angleM = 6 * dateClock.getUTCMinutes();
-  const angle = Math.abs(angleH - angleM) > 180 ? 360 - Math.abs(angleH - angleM) : Math.abs(angleH - angleM);
-  return Math.abs(angle / 57.2958);
+  const angleHM = Math.abs(angleH - angleM) > 360 ? Math.abs(angleH - angleM) - Math.trunc(Math.abs(angleH - angleM) / 360) * 360 : Math.abs(angleH - angleM);
+  const angle = angleHM > 180 ? 360 - angleHM : angleHM;
+  return Math.abs(angle / 57.29577951308232087);
 }
 
 

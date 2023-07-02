@@ -24,6 +24,9 @@ function Rectangle(width, height) {
   return {
     width,
     height,
+    getArea() {
+     return this.width * this.height;
+    },
   };
 }
 
@@ -56,7 +59,8 @@ function getJSON(obj) {
  */
 function fromJSON(proto, json) {
   const obj = JSON.parse(json);
-  obj.prototype = proto;
+  Object.setPrototypeOf(obj, proto);
+  // obj.__proto__  = proto;
   return obj;
 }
 
@@ -125,6 +129,12 @@ const cssSelectorBuilder = {
   elCombine: '',
 
   element(value) {
+    if (this.el !== '') {
+      throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    }
+    if (this.elId !== '' || this.elClass !== '' || this.elAttr !== '' || this.elPseudoClass !== '' || this.elPseudoElement !== '') {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
     this.el = value;
     const select = { ...this };
     this.cleanObj();
@@ -132,6 +142,12 @@ const cssSelectorBuilder = {
   },
 
   id(value) {
+    if (this.elId !== '') {
+      throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    }
+    if (this.elClass !== '' || this.elAttr !== '' || this.elPseudoClass !== '' || this.elPseudoElement !== '') {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
     this.elId = `#${value}`;
     const select = { ...this };
     this.cleanObj();
@@ -139,6 +155,9 @@ const cssSelectorBuilder = {
   },
 
   class(value) {
+    if (this.elAttr !== '' || this.elPseudoClass !== '' || this.elPseudoElement !== '') {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
     this.elClass += `.${value}`;
     const select = { ...this };
     this.cleanObj();
@@ -146,6 +165,9 @@ const cssSelectorBuilder = {
   },
 
   attr(value) {
+    if (this.elPseudoClass !== '' || this.elPseudoElement !== '') {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
     this.elAttr = `[${value}]`;
     const select = { ...this };
     this.cleanObj();
@@ -153,6 +175,9 @@ const cssSelectorBuilder = {
   },
 
   pseudoClass(value) {
+    if (this.elPseudoElement !== '') {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
     this.elPseudoClass += `:${value}`;
     const select = { ...this };
     this.cleanObj();
@@ -160,6 +185,9 @@ const cssSelectorBuilder = {
   },
 
   pseudoElement(value) {
+    if (this.elPseudoElement !== '') {
+      throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    }
     this.elPseudoElement = `::${value}`;
     const select = { ...this };
     this.cleanObj();
@@ -169,8 +197,10 @@ const cssSelectorBuilder = {
   combine(selector1, combinator, selector2) {
     const select1 = selector1.combineSelect();
     const select2 = selector2.combineSelect();
-    this.elCombine = `${select1}${combinator}${select2}`;
-    return { ...this };
+    this.elCombine += `${select1} ${combinator} ${select2}`;
+    const select = { ...this };
+    this.elCombine = '';
+    return select;
   },
 
   cleanObj() {
@@ -183,7 +213,7 @@ const cssSelectorBuilder = {
   },
 
   combineSelect() {
-    const selector = `${this.el}${this.elId}${this.elClass}${this.elAttr}${this.elPseudoClass}${this.elPseudoElement}`;
+    const selector = `${this.el}${this.elId}${this.elClass}${this.elAttr}${this.elPseudoClass}${this.elPseudoElement}${this.elCombine}`;
     this.cleanObj();
     this.elCombine = '';
     return selector;
@@ -194,8 +224,9 @@ const cssSelectorBuilder = {
     this.cleanObj();
     this.elCombine = '';
     return selector;
-  }
+  },
 };
+
 module.exports = {
   Rectangle,
   getJSON,

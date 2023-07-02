@@ -187,7 +187,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-  return (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2 < circle.radius ** 2
+  return (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2 < circle.radius ** 2;
 }
 
 
@@ -238,7 +238,7 @@ function findFirstSingleChar(str) {
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   let result = isStartIncluded === true ? '[' : '(';
   result += (a < b ? a : b) + ', ' + (a < b ? b : a);
-  result += isEndIncluded === true ? '] ' : ')';
+  result += isEndIncluded === true ? ']' : ')';
   return result;
 }
 
@@ -300,13 +300,23 @@ function reverseInteger(num) {
 function isCreditCardNumber(ccn) {
   const ccnArr = ccn.toString().split('');
   let result = 0;
+  if (ccnArr.length % 2 === 0) {
   for (let i = 0; i < ccnArr.length; i++) {
-    if (i % 2 !== 0) {
+    if (i % 2 !== 0) { // чет
       result += +ccnArr[i];
     } else {
       result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
     }
   }
+} else {
+  for (let i = 0; i < ccnArr.length; i++) {
+    if (i % 2 === 0) { // нечет
+      result += +ccnArr[i];
+    } else {
+      result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
+    }
+  }
+}
   return result % 10 === 0;
 }
 
@@ -511,18 +521,18 @@ function evaluateTicTacToePosition(position) {
         subDiag.push(position[j][i]);
       }
     }
-    if (col.every((el) => el === col[0])) {
+    if (col.every((el) => el === col[0] && col.length === position.length)) {
       return col[0];
     }
   }
-  if (mainDiag.every((el) => el === mainDiag[0])) {
+  if (mainDiag.every((el) => el === mainDiag[0]) && mainDiag.length === position.length) {
     return mainDiag[0];
   }
-  if (subDiag.every((el) => el === subDiag[0])) {
+  if (subDiag.every((el) => el === subDiag[0]) && subDiag.length === position.length) {
     return subDiag[0];
   }
   for (let i = 0; i < position.length; i++) {
-    if (position[i].every((el) => el === position[i][0])) {
+    if (position[i].every((el) => el === position[i][0]) && position[i].length === position.length && position[i][0] !== undefined) {
       return position[i][0];
     }
   }

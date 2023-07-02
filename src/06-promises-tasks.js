@@ -39,7 +39,7 @@ function willYouMarryMe(isPositiveAnswer) {
     } else {
       reject(Error('Wrong parameter is passed! Ask her again.'));
     }
-  })
+  });
 }
 
 /**
@@ -58,13 +58,13 @@ function willYouMarryMe(isPositiveAnswer) {
  *
  */
 function processAllPromises(array) {
-  let arr = [];
+  const arr = [];
   for (let i = 0; i < array.length; i++) {
-    array[i].then((x) => { arr.push(x) }).catch((error) => { arr.push(error) });
+    array[i].then((x) => { arr.push(x); }).catch((error) => { arr.push(error); });
   }
   return new Promise((resolve) => {
     resolve(arr);
-  })
+  });
 }
 
 /**
@@ -91,9 +91,9 @@ function getFastestPromise(array) {
     array.forEach((item) => {
       item.then((x) => {
         resolve(x);
-      }).catch((x) => { reject(Error(`${x}`)) })
-    })
-  })
+      }).catch((x) => { reject(Error(`${x.message}`)); });
+    });
+  });
 }
 
 /**
@@ -114,14 +114,25 @@ function getFastestPromise(array) {
  *
  */
 function chainPromises(array, action) {
-  let promisesArr = Promise.allSettled(array).then((results) => {
-    console.log(results[0].value);
-    let start = typeof results[0].value === 'string' ? '' : 0;
-    console.log(start);
-    return results.reduce((acc, next) => action(acc, next.value), start);
+  return new Promise((resolve, reject) => {
+    const results = [];
+    for (let i = 0; i < array.length; i++) {
+      array[i].then((x) => {
+        results.push(x);
+        const start = typeof results[0] === 'string' ? '' : 0;
+        const result = results.reduce((acc, next) => action(acc, next), start);
+        if (i === array.length - 1) {
+          if (typeof result === 'string') {
+            resolve(result.slice(1));
+          } else {
+            resolve(result);
+          }
+        }
+      }).catch((x) => {
+        reject(x);
+      });
+    }
   });
-  console.log(promisesArr);
-  return promisesArr;
 }
 
 module.exports = {

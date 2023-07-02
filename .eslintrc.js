@@ -23,6 +23,7 @@ module.exports = {
     "no-nested-ternary": "off",
     'prefer-template': "off",
     'max-len': ["error", { "code": 400 }],
-    'no-plusplus': "off"
+    'no-plusplus': "off",
+    'prefer-rest-params': 'off'
   },
 };

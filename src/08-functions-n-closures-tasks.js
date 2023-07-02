@@ -24,9 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return (x) => {
-    return f(g(x))
-  }
+  return (x) => f(g(x));
 }
 
 
@@ -47,7 +45,7 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  return (x) => exponent ** x;
+  return (x) => x ** exponent;
 }
 
 
@@ -65,25 +63,20 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...args) {
-  let result = '';
-  if (args.length > 0) {
-    for (let i = 0; i < args.length; i++) {
-      let part = '';
-      const koff = Math.abs(args[i]) === 1 ? '' : Math.abs(args[i]);
-      if (args[i] < 0) {
-        part = i === args.length - 1 ? ` - ${koff}` : i === args.length - 2 ? ` - ${koff}*x` : ` - ${koff}*x^${args.length - i - 1}`;
-      }
-
-      if (args[i] > 0) {
-        part = i === args.length - 1 ? ` + ${koff}` : i === args.length - 2 ? ` + ${koff}*x` : ` + ${koff}*x^${args.length - i - 1}`;
-      }
+  const arg = args;
+  return (x) => {
+  let result = 0;
+  if (arg.length > 0) {
+    for (let i = 0; i < arg.length; i++) {
+      let part = 0;
+        part = i === arg.length - 1 ? arg[i] : i === arg.length - 2 ? arg[i] * x : arg[i] * x ** (arg.length - i - 1);
       result += part;
     }
   } else {
     return null;
   }
-  result = result[1] === '+' ? 'y =' + result.slice(2, result.length) : 'y = ' + result;
   return result;
+};
 }
 
 
@@ -101,21 +94,10 @@ function getPolynom(...args) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(fn) {
-  let memory = [];
-  let k = 0;
-  return function() {
-    if (memory.length > 0) {
-      var result = fn();
-      memory.push(result);
-      return memory[k++];
-    } else {
-      var result = fn();
-      memory.push(result);
-      return result;
-    }
-  };
-}
+
+    const memoize = (fn, cache = new Map()) => (arg) => (
+      cache.has(arg) ? cache : cache.set(arg, fn(arg))
+    ).get(arg);
 
 
 /**
@@ -139,10 +121,11 @@ function retry(func, attempts) {
       return func();
     } catch (e) {
       for (let i = attempts; i > 0; i--) {
-        return func();
+        return retry(func, attempts)();
       }
     }
-  }
+    return 0;
+  };
 }
 
 
@@ -169,13 +152,14 @@ function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-function logger( func, logFunc) {
-  return (...args)=>{
-    logFunc(`${func.name}(${args}) starts`);
-    const result = func(args);
-    logFunc(`${func.name}(${args}) ends`);
+function logger(func, logFunc) {
+  return (...args) => {
+    const argsString = JSON.stringify(args).slice(1, JSON.stringify(args).length - 1);
+    logFunc(`${func.name}(${argsString}) starts`);
+    const result = func(...args);
+    logFunc(`${func.name}(${argsString}) ends`);
     return result;
-  }
+  };
 }
 
 
@@ -193,9 +177,7 @@ function logger( func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return (...args2) => {
-    return fn(...args1, ...args2);
-  }
+  return (...args2) => fn(...args1, ...args2);
 }
 
 
@@ -221,7 +203,7 @@ function getIdGeneratorFunction(startFrom) {
   return () => {
     currId++;
     return currId;
-  }
+  };
 }
 
 
