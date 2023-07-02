@@ -54,7 +54,7 @@ function getCircleCircumference(radius) {
 function getAverage(value1, value2) {
 // return Array.from(arguments).reduce((accumulator, currentValue) =>
 // accumulator + currentValue) / arguments.length;
-  return (BigInt(value1) + BigInt(value2)) / BigInt(2);
+  return Number(value1) / Number(2) + Number(value2) / Number(2);
 // throw new Error('Not implemented');
 }
 
