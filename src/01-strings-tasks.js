@@ -20,7 +20,7 @@
  */
 
 function concatenateStrings(value1, value2) {
-return value1.toString() + value2.toString();
+  return value1.toString() + value2.toString();
 }
 
 
@@ -36,7 +36,7 @@ return value1.toString() + value2.toString();
  *   ''      => 0
  */
 function getStringLength(value) {
-return value.length;
+  return value.length;
 }
 
 /**
@@ -53,7 +53,7 @@ return value.length;
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-return `Hello, ${firstName} ${lastName}!`;
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -67,7 +67,7 @@ return `Hello, ${firstName} ${lastName}!`;
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-return value.replace('Hello, ', '').replace('!', '');
+  return value.replace('Hello, ', '').replace('!', '');
 }
 
 
@@ -82,7 +82,7 @@ return value.replace('Hello, ', '').replace('!', '');
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-return value[0];
+  return value[0];
 }
 
 /**
@@ -97,7 +97,7 @@ return value[0];
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-return value.trim();
+  return value.trim();
 }
 
 /**
@@ -158,7 +158,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-return str.toUpperCase();
+  return str.toUpperCase();
 }
 
 /**
@@ -177,7 +177,7 @@ return str.toUpperCase();
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-return str.split(';');
+  return str.split(';');
 }
 
 /**
@@ -208,12 +208,12 @@ function getRectangleString(width, height) {
   for (let h = 1; h <= height; h++) {
     for (let w = 1; w <= width; w++) {
       if (h === 1) {
-        rectangle = w === 1 ? rectangle + '┌' : w < width ? rectangle + '─' : rectangle + '┐\n';
+        rectangle = w === 1 ? `${rectangle}┌` : w < width ? `${rectangle}─` : `${rectangle}┐\n`;
       }
       if (h === height) {
-        rectangle = w === 1 ? rectangle + '└' : w < width ? rectangle + '─' : rectangle + '┘\n';
+        rectangle = w === 1 ? `${rectangle}└` : w < width ? `${rectangle}─` : `${rectangle}┘\n`;
       } else if (h > 1 && h < height) {
-        rectangle = w === 1 ? rectangle + '│' : w < width ? rectangle + ' ' : rectangle + '│\n';
+        rectangle = w === 1 ? `${rectangle}│` : w < width ? `${rectangle} ` : `${rectangle}│\n`;
       }
     }
   }
@@ -268,7 +268,7 @@ function encodeToRot13(str) {
  */
 function isString(value) {
   const str = value;
-return typeof str === 'string' || str instanceof String;
+  return typeof str === 'string' || str instanceof String;
 }
 
 
@@ -297,7 +297,7 @@ return typeof str === 'string' || str instanceof String;
  *   'K♠' => 51
  */
 function getCardId(value) {
-return ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'].indexOf(value);
+  return ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'].indexOf(value);
 }
 
 

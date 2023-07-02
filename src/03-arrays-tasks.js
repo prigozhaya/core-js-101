@@ -21,7 +21,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-return arr.indexOf(value);
+  return arr.indexOf(value);
 }
 
 /**
@@ -40,12 +40,12 @@ function generateOdds(len) {
 //   arr.push(i);
 // }
 // return arr;
-const arr = new Array(len);
-arr.fill(1);
-return arr.map((elem, index) => {
-  const result = index === 0 ? 1 : index + index + 1;
-return result;
-});
+  const arr = new Array(len);
+  arr.fill(1);
+  return arr.map((elem, index) => {
+    const result = index === 0 ? 1 : index + index + 1;
+    return result;
+  });
 }
 
 
@@ -62,7 +62,7 @@ return result;
  *    [] => []
  */
 function doubleArray(arr) {
-return arr.concat(arr);
+  return arr.concat(arr);
 }
 
 
@@ -93,7 +93,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-return arr.filter((el) => typeof el === 'string');
+  return arr.filter((el) => typeof el === 'string');
 }
 
 /**
@@ -125,7 +125,7 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-return arr.map((el) => el.toUpperCase());
+  return arr.map((el) => el.toUpperCase());
 }
 
 
@@ -156,7 +156,7 @@ function getStringsLength(arr) {
  */
 function insertItem(arr, item, index) {
   arr.splice(index, 0, item);
- return arr;
+  return arr;
 }
 
 /**
@@ -211,9 +211,9 @@ function getTail(arr, n) {
  */
 function toCsvText(arr) {
   return arr.reduce((result, current) => {
-const n = '\n';
-return result.length === 0 ? current + n : result + current + n;
-}, '').slice(0, -1);
+    const n = '\n';
+    return result.length === 0 ? current + n : result + current + n;
+  }, '').slice(0, -1);
 }
 /**
  * Transforms the numeric array into the according array of squares:
@@ -246,16 +246,16 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-    let sum = 0;
-    return arr.map((elem, index) => {
-  if (index === 0) {
-    sum = elem;
-  } else {
-    sum += elem;
-  }
-  return sum;
-    });
-  }
+  let sum = 0;
+  return arr.map((elem, index) => {
+    if (index === 0) {
+      sum = elem;
+    } else {
+      sum += elem;
+    }
+    return sum;
+  });
+}
 
 /**
  * Returns every second item from the specified array:
@@ -334,7 +334,7 @@ function getPositivesCount(arr) {
   return arr.reduce((result, current) => {
     const n = '';
     return n === '' && current > 0 && typeof current === 'number' ? result + 1 : result;
-    }, 0);
+  }, 0);
 }
 
 /**
@@ -389,7 +389,7 @@ function getFalsyValuesCount(arr) {
   return arr.reduce((result, current) => {
     const n = '';
     return n === '' && !current !== false ? result + 1 : result;
-    }, 0);
+  }, 0);
 }
 
 /**
@@ -422,7 +422,7 @@ function findAllOccurrences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-return arr.join(',');
+  return arr.join(',');
 }
 
 
@@ -453,20 +453,20 @@ return arr.join(',');
  *    ]
  */
 function sortCitiesArray(arr) {
- return arr.sort((a, b) => {
-  if (a.country > b.country) {
-  return 1;
-}
-if (a.country < b.country) {
-  return -1;
-}
-if (a.city > b.city) {
-  return 1;
-}
-if (a.city < b.city) {
-  return -1;
-}
-return 0;
+  return arr.sort((a, b) => {
+    if (a.country > b.country) {
+      return 1;
+    }
+    if (a.country < b.country) {
+      return -1;
+    }
+    if (a.city > b.city) {
+      return 1;
+    }
+    if (a.city < b.city) {
+      return -1;
+    }
+    return 0;
   });
 }
 
@@ -584,7 +584,7 @@ function group(array, keySelector, valueSelector) {
 
   arr.map((el) => {
     map.set(el, []);
-   return el;
+    return el;
   });
 
   array.map((el) => {
@@ -612,7 +612,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-return arr.map((el) => childrenSelector(el)).flat();
+  return arr.map((el) => childrenSelector(el)).flat();
 }
 
 

@@ -65,18 +65,18 @@ function getPowerFunction(exponent) {
 function getPolynom(...args) {
   const arg = args;
   return (x) => {
-  let result = 0;
-  if (arg.length > 0) {
-    for (let i = 0; i < arg.length; i++) {
-      let part = 0;
+    let result = 0;
+    if (arg.length > 0) {
+      for (let i = 0; i < arg.length; i++) {
+        let part = 0;
         part = i === arg.length - 1 ? arg[i] : i === arg.length - 2 ? arg[i] * x : arg[i] * x ** (arg.length - i - 1);
-      result += part;
+        result += part;
+      }
+    } else {
+      return null;
     }
-  } else {
-    return null;
-  }
-  return result;
-};
+    return result;
+  };
 }
 
 
@@ -95,9 +95,9 @@ function getPolynom(...args) {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 
-    const memoize = (fn, cache = new Map()) => (arg) => (
-      cache.has(arg) ? cache : cache.set(arg, fn(arg))
-    ).get(arg);
+const memoize = (fn, cache = new Map()) => (arg) => (
+  cache.has(arg) ? cache : cache.set(arg, fn(arg))
+).get(arg);
 
 
 /**

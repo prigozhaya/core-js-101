@@ -35,7 +35,7 @@ function getFizzBuzz(num) {
   } if (num % 3 === 0) {
     return 'Fizz';
   }
-    return num;
+  return num;
 }
 
 /**
@@ -203,14 +203,14 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
- const strArr = str.split('');
- for (let i = 0; i < strArr.length; i++) {
-   const allChar = strArr.filter((x) => x === strArr[i]);
-   if (allChar.length === 1) {
-    return strArr[i];
-   }
- }
- return null;
+  const strArr = str.split('');
+  for (let i = 0; i < strArr.length; i++) {
+    const allChar = strArr.filter((x) => x === strArr[i]);
+    if (allChar.length === 1) {
+      return strArr[i];
+    }
+  }
+  return null;
 }
 
 /**
@@ -237,7 +237,7 @@ function findFirstSingleChar(str) {
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   let result = isStartIncluded === true ? '[' : '(';
-  result += (a < b ? a : b) + ', ' + (a < b ? b : a);
+  result += `${a < b ? a : b}, ${a < b ? b : a}`;
   result += isEndIncluded === true ? ']' : ')';
   return result;
 }
@@ -301,22 +301,22 @@ function isCreditCardNumber(ccn) {
   const ccnArr = ccn.toString().split('');
   let result = 0;
   if (ccnArr.length % 2 === 0) {
-  for (let i = 0; i < ccnArr.length; i++) {
-    if (i % 2 !== 0) { // чет
-      result += +ccnArr[i];
-    } else {
-      result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
+    for (let i = 0; i < ccnArr.length; i++) {
+      if (i % 2 !== 0) { // чет
+        result += +ccnArr[i];
+      } else {
+        result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
+      }
+    }
+  } else {
+    for (let i = 0; i < ccnArr.length; i++) {
+      if (i % 2 === 0) { // нечет
+        result += +ccnArr[i];
+      } else {
+        result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
+      }
     }
   }
-} else {
-  for (let i = 0; i < ccnArr.length; i++) {
-    if (i % 2 === 0) { // нечет
-      result += +ccnArr[i];
-    } else {
-      result += +ccnArr[i] * 2 > 9 ? +ccnArr[i] * 2 - 9 : +ccnArr[i] * 2;
-    }
-  }
-}
   return result % 10 === 0;
 }
 
@@ -371,10 +371,10 @@ function isBracketsBalanced(str) {
     if (openBrackets.includes(str[i])) {
       stack.push(str[i]);
     } else if (closeBrackets.indexOf(str[i]) === openBrackets.indexOf(stack[stack.length - 1])) {
-        stack.pop();
-      } else {
-        return false;
-      }
+      stack.pop();
+    } else {
+      return false;
+    }
   }
   return stack.length === 0;
 }
@@ -430,7 +430,7 @@ function getCommonDirectoryPath(pathes) {
       return current[i] === pathStr ? count + 1 : count;
     }, 0);
     if (checkCount === pathesArrs.length) {
-      result += result.length > 0 ? pathesArrs[0][i] + '/' : pathesArrs[0][i];
+      result += result.length > 0 ? `${pathesArrs[0][i]}/` : pathesArrs[0][i];
     } else {
       return result;
     }
@@ -459,8 +459,8 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
   const m1Rows = m1.length;
-    const m1Cols = m1[0].length;
-    const m2Cols = m2[0].length;
+  const m1Cols = m1[0].length;
+  const m2Cols = m2[0].length;
 
   const multiplyM = new Array(m1Rows);
   for (let r = 0; r < m1Rows; r++) {

@@ -86,7 +86,7 @@ function timeSpanToString(startDate, endDate) {
   const sec = dateDiff / msInSec > 9 ? `${Math.trunc(dateDiff / msInSec)}` : `0${Math.trunc(dateDiff / msInSec)}`;
   const msec = dateDiff - sec * msInSec < 10 ? `00${Math.trunc(dateDiff - sec * msInSec)}` : dateDiff - sec * msInSec < 100 ? `0${Math.trunc(dateDiff - sec * msInSec)}` : `${Math.trunc(dateDiff - sec * msInSec)}`;
   return `${hour}:${min}:${sec}.${msec}`;
-  }
+}
 
 
 /**

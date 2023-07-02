@@ -20,7 +20,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-return width * height;
+  return width * height;
 }
 
 
@@ -36,7 +36,7 @@ return width * height;
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 /**
@@ -54,7 +54,7 @@ return 2 * Math.PI * radius;
 function getAverage(value1, value2) {
 // return Array.from(arguments).reduce((accumulator, currentValue) =>
 // accumulator + currentValue) / arguments.length;
-return (BigInt(value1) + BigInt(value2)) / BigInt(2);
+  return (BigInt(value1) + BigInt(value2)) / BigInt(2);
 // throw new Error('Not implemented');
 }
 
@@ -92,7 +92,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-return -b / a;
+  return -b / a;
 }
 
 
@@ -131,8 +131,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-const str = value.toString();
-return str[str.length - 1];
+  const str = value.toString();
+  return str[str.length - 1];
 }
 
 
@@ -165,7 +165,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 
@@ -210,12 +210,12 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-for (let i = 2; i < n; i++) {
-  if (n % i === 0) {
-    return false;
+  for (let i = 2; i < n; i++) {
+    if (n % i === 0) {
+      return false;
+    }
   }
-}
-return true;
+  return true;
 }
 
 /**
